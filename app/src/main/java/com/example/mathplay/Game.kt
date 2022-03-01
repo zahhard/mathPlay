@@ -15,6 +15,7 @@ object Game {
     var startRangB = "0"
     var endRangB = "10"
     var operator = ""
+    var scoreList = ArrayList<Int>()
 
 
     fun createRandoms(){
@@ -59,5 +60,9 @@ object Game {
 
     fun randomOption(){
         randomIndex = Random.nextInt(0..3)
+    }
+
+    fun max (): Int? {
+        return (scoreList.maxOrNull())
     }
 }

@@ -10,7 +10,29 @@
     tools:context=".resultActivty">
 
     <TextView
-        android:id="@+id/tv_score_final_score"
+        android:id="@+id/max_score"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Max score"
+        android:gravity="center"
+        android:layout_margin="16dp"
+        android:layout_marginTop="140dp"
+        android:textColor="@color/black"
+        android:textSize="34sp"
+        android:textStyle="bold|italic"/>
+
+    <TextView
+        android:id="@+id/max_score_added"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:layout_marginTop="140dp"
+        android:gravity="center"
+        android:textSize="20sp"
+        android:text="TextView" />
+
+    <TextView
+        android:id="@+id/tv_score_final"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
@@ -48,4 +70,5 @@
         android:layout_marginHorizontal="55sp"
         app:cornerRadius="30sp"
         android:text="@string/finish" />
+
 </LinearLayout>
