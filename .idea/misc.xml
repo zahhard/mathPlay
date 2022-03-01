@@ -3,10 +3,12 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-       <entry key="..\:/BoutCamp/mathPlay/app/src/main/res/layout/activity_game_setting.xml" value="0.1585144927536232" />
+        <entry key="..\:/BoutCamp/mathPlay/app/src/main/res/layout/activity_game.xml" value="0.176" />
+        <entry key="..\:/BoutCamp/mathPlay/app/src/main/res/layout/activity_game_setting.xml" value="0.1585144927536232" />
         <entry key="..\:/BoutCamp/mathPlay/app/src/main/res/layout/activity_input.xml" value="0.275" />
         <entry key="..\:/BoutCamp/mathPlay/app/src/main/res/layout/activity_main.xml" value="0.22146739130434784" />
         <entry key="..\:/BoutCamp/mathPlay/app/src/main/res/layout/activity_main2.xml" value="0.22146739130434784" />
+        <entry key="..\:/BoutCamp/mathPlay/app/src/main/res/layout/activity_result.xml" value="0.22146739130434784" />
         <entry key="..\:/BoutCamp/mathPlay/app/src/main/res/layout/et_style.xml" value="0.22146739130434784" />
       </map>
     </option>

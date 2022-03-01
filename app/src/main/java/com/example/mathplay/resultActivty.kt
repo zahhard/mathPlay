@@ -16,7 +16,9 @@ class resultActivty : AppCompatActivity() {
         setContentView(view)
 
         var score = intent.getIntExtra("score", -1)
+        Game.scoreList.add(score)
         binding.tvScoreRsult.text = score.toString()
+        binding.maxScoreAdded.text = Game.max().toString()
 
         binding.btnReset.setOnClickListener {
             val resultIntent = Intent()
