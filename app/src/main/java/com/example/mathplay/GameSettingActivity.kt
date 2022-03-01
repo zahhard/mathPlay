@@ -4,9 +4,11 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Range
+import android.widget.Toast
 import com.example.mathplay.databinding.ActivityGameBinding
 import com.example.mathplay.databinding.ActivityGameSettingBinding
 import java.awt.font.NumericShaper
+import java.lang.Exception
 
 class GameSettingActivity : AppCompatActivity() {
 
@@ -23,28 +25,7 @@ class GameSettingActivity : AppCompatActivity() {
         binding.btnGoToGame.setOnClickListener {
             var intent = Intent(this, GameActivity::class.java)
             var inputOperator = binding.edChooseOperator.text
-            if (inputOperator.matches(Regex("^[*]|[-]|[+]|[/]|[%]$"))){
-                operator = inputOperator.toString()
-            }
-            if (binding.startRangeA.text.toString().toInt() < binding.endRangeA.text.toString().toInt()){
-                Game.startRangA = binding.startRangeA.text.toString().toInt()
-                Game.endRangA = binding.endRangeA.text.toString().toInt()
-                isSetA = true
-            }
-            else {
-                binding.startRangeA.error = "inValid range"
-                binding.endRangeA.error = "inValid range"
-            }
 
-            if (binding.startRangeB.text.toString().toInt() < binding.endRangeB.text.toString().toInt()){
-                Game.startRangB = binding.startRangeB.text.toString().toInt()
-                Game.endRangB = binding.endRangeB.text.toString().toInt()
-                isSetB = true
-            }
-            else {
-                binding.startRangeB.error = "inValid range"
-                binding.endRangeB.error = "inValid range"
-            }
             if (binding.startRangeA.text.isNullOrBlank() &&
                 binding.startRangeB.text.isNullOrBlank() &&
                 binding.endRangeA.text.isNullOrBlank() &&
@@ -53,10 +34,41 @@ class GameSettingActivity : AppCompatActivity() {
                 Game.operator = "%"
                 startActivity(intent)
             }
+            if (inputOperator.matches(Regex("^[*]|[-]|[+]|[/]|[%]$"))){
+                operator = inputOperator.toString()
+                intent.putExtra("operator", operator)
+            }
+            try {
+                if (binding.startRangeA.text.toString() < binding.endRangeA.text.toString() &&
+                    !binding.startRangeA.text.isNullOrBlank()&&
+                    !binding.endRangeA.text.isNullOrBlank()){
+                    Game.startRangA = binding.startRangeA.text.toString()
+                    Game.endRangA = binding.endRangeA.text.toString()
+                    isSetA = true
+                }
+                else {
+                    binding.startRangeA.error = "inValid range"
+                    binding.endRangeA.error = "inValid range"
+                }
+
+                if (binding.startRangeB.text.toString() < binding.endRangeB.text.toString() &&
+                    !binding.startRangeB.text.isNullOrBlank()&&
+                    !binding.endRangeB.text.isNullOrBlank()){
+                    Game.startRangB = binding.startRangeB.text.toString()
+                    Game.endRangB = binding.endRangeB.text.toString()
+                    isSetB = true
+                }
+                else {
+                    binding.startRangeB.error = "inValid range"
+                    binding.endRangeB.error = "inValid range"
+                }
+            }
+            catch (e:Exception){
+                Toast.makeText(this, "invalid", Toast.LENGTH_SHORT).show()
+            }
 
             if (isSetA && isSetB)
                 startActivity(intent)
-
         }
     }
 }
