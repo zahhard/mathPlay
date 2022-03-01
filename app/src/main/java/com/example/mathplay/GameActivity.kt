@@ -5,6 +5,7 @@ import android.content.Intent
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Range
 import android.widget.Button
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
@@ -106,29 +107,16 @@ class GameActivity : AppCompatActivity() {
     }
 
     fun setValueToButtons() {
-        if (Game.randomIndex == 0) {
-            buttons[0].text = Game.result.toString()
-            buttons[1].text = Random.nextInt(1..20).toString()
-            buttons[2].text = Random.nextInt(1..20).toString()
-            buttons[3].text = Random.nextInt(1..20).toString()
-        }
-        if (Game.randomIndex == 1) {
-            buttons[1].text = Game.result.toString()
-            buttons[0].text = Random.nextInt(1..20).toString()
-            buttons[2].text = Random.nextInt(1..20).toString()
-            buttons[3].text = Random.nextInt(1..20).toString()
-        }
-        if (Game.randomIndex == 2) {
-            buttons[2].text = Game.result.toString()
-            buttons[1].text = Random.nextInt(1..20).toString()
-            buttons[3].text = Random.nextInt(1..20).toString()
-            buttons[0].text = Random.nextInt(1..20).toString()
-        }
-        if (Game.randomIndex == 3) {
-            buttons[3].text = Game.result.toString()
-            buttons[1].text = Random.nextInt(1..20).toString()
-            buttons[2].text = Random.nextInt(1..20).toString()
-            buttons[0].text = Random.nextInt(1..20).toString()
+        var endRange = Game.b * 2
+        if (Game.operator == "*")
+            endRange = Game.b * Game.b
+
+        for (i in 0..3){
+            if (Game.randomIndex == i){
+                buttons[i].text = Game.result.toString()
+            }
+            else
+                buttons[i].text = Random.nextInt(Game.a..endRange).toString()
         }
     }
 
