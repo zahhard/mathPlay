@@ -10,10 +10,16 @@ object Game {
     var level = 0
     var remainA = 0
     var randomIndex = 0
+    var startRangA = 0
+    var endRangA = 100
+    var startRangB = 0
+    var endRangB = 10
+    var operator = ""
+
 
     fun createRandoms(){
-        a = Random.nextInt(1..100)
-        b = Random.nextInt(1..10)
+        a = Random.nextInt(startRangA..endRangA)
+        b = Random.nextInt(startRangB..endRangB)
     }
 
     fun nextLevel(){

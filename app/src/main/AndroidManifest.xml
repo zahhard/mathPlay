@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MathPlay">
         <activity
+            android:name=".GameSettingActivity"
+            android:exported="false" />
+        <activity
             android:name=".resultActivty"
             android:exported="false" />
         <activity
