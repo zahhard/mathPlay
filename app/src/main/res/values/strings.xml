@@ -1,8 +1,8 @@
 <resources>
-    <string name="app_name">mathPlay</string>
+    <string name="app_name">Math Game</string>
     <string name="dice">dice</string>
     <string name="reset">reset</string>
     <string name="finish">finish</string>
     <string name="score">Score:</string>
-    <string name="questionText">Guess the remainder of larger one to smaller</string>
+    <string name="questionText">Guess the answer</string>
 </resources>
