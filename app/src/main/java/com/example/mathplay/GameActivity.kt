@@ -22,6 +22,7 @@ class GameActivity : AppCompatActivity() {
         val view = binding.root
         setContentView(view)
 
+        Game.operator = intent.getStringExtra("operator").toString()
         buttonInit()
         Game.nextLevel()
         binding.tvRandom1.text = Game.a.toString()
@@ -106,25 +107,25 @@ class GameActivity : AppCompatActivity() {
 
     fun setValueToButtons() {
         if (Game.randomIndex == 0) {
-            buttons[0].text = Game.remainA.toString()
+            buttons[0].text = Game.result.toString()
             buttons[1].text = Random.nextInt(1..20).toString()
             buttons[2].text = Random.nextInt(1..20).toString()
             buttons[3].text = Random.nextInt(1..20).toString()
         }
         if (Game.randomIndex == 1) {
-            buttons[1].text = Game.remainA.toString()
+            buttons[1].text = Game.result.toString()
             buttons[0].text = Random.nextInt(1..20).toString()
             buttons[2].text = Random.nextInt(1..20).toString()
             buttons[3].text = Random.nextInt(1..20).toString()
         }
         if (Game.randomIndex == 2) {
-            buttons[2].text = Game.remainA.toString()
+            buttons[2].text = Game.result.toString()
             buttons[1].text = Random.nextInt(1..20).toString()
             buttons[3].text = Random.nextInt(1..20).toString()
             buttons[0].text = Random.nextInt(1..20).toString()
         }
         if (Game.randomIndex == 3) {
-            buttons[3].text = Game.remainA.toString()
+            buttons[3].text = Game.result.toString()
             buttons[1].text = Random.nextInt(1..20).toString()
             buttons[2].text = Random.nextInt(1..20).toString()
             buttons[0].text = Random.nextInt(1..20).toString()
