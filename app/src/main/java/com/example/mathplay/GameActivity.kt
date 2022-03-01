@@ -5,6 +5,7 @@ import android.content.Intent
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.CountDownTimer
 import android.util.Range
 import android.widget.Button
 import androidx.activity.result.ActivityResult
@@ -17,6 +18,7 @@ import kotlin.random.nextInt
 class GameActivity : AppCompatActivity() {
     lateinit var binding: ActivityGameBinding
     var buttons = ArrayList<Button>()
+    lateinit var countDownTimer : CountDownTimer
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityGameBinding.inflate(layoutInflater)
@@ -36,6 +38,7 @@ class GameActivity : AppCompatActivity() {
             for (i in 0..3){
                 buttons[i].isClickable = true
             }
+            countDownTimer.start()
         }
 
         binding.tvScore.text = Game.score.toString()
@@ -64,7 +67,6 @@ class GameActivity : AppCompatActivity() {
         }
 
         if (savedInstanceState != null) {
-
             binding.btnOption1.text = savedInstanceState.getString("button0")
             binding.btnOption2.text = savedInstanceState.getString("button1")
             binding.btnOption3.text = savedInstanceState.getString("button2")
@@ -74,12 +76,27 @@ class GameActivity : AppCompatActivity() {
             binding.tvRandom1.text = savedInstanceState.getInt("a").toString()
             binding.tvRandom2.text = savedInstanceState.getInt("b").toString()
 
-
 //            buttonInit()
 //            binding.tvRandom1.text = Game.a.toString()
 //            binding.tvRandom2.text = Game.b.toString()
 //            setValueToButtons()
         }
+
+        countDownTimer = object : CountDownTimer(10000, 1000) {
+
+            override fun onTick(millisUntilFinished: Long) {
+                binding.timer.setText("Timer: " + millisUntilFinished / 1000)
+            }
+
+            override fun onFinish() {
+                initView()
+                for (i in 0..3){
+                    buttons[i].isClickable = true
+                }
+                countDownTimer.start()
+            }
+        }
+        countDownTimer.start()
     }
 
     fun initView() {
