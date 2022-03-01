@@ -9,6 +9,7 @@ object Game {
     var score = 0
     var level = 1
     var remainA = 0
+    var randomIndex = 0
 
     fun createRandoms(){
         a = Random.nextInt(1..100)
@@ -27,5 +28,9 @@ object Game {
         }
         else
             remainA = b % a
+    }
+
+    fun randomOption(){
+        randomIndex = Random.nextInt(0..3)
     }
 }
