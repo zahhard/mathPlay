@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">mathPlay</string>
+    <string name="dice">dice</string>
+    <string name="reset">reset</string>
 </resources>

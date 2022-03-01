@@ -54,13 +54,20 @@ class MainActivity : AppCompatActivity() {
 
     fun initView(view: View){
         Game.nextLevel()
-           
-        binding.tvRandom1.text = Game.a.toString()
-        binding.tvRandom2.text = Game.b.toString()
-        Game.randomOption()
-        setValueToButtons()
-        for (i in 0..3){
-            buttons[i].setBackgroundColor(ContextCompat.getColor(this, R.color.purple_500))
+        if (Game.level > 5){
+            for (button in buttons){
+                button.isEnabled = false
+            }
+            binding.btnDice.isEnabled = false
+        }
+        else {
+            binding.tvRandom1.text = Game.a.toString()
+            binding.tvRandom2.text = Game.b.toString()
+            Game.randomOption()
+            setValueToButtons()
+            for (i in 0..3) {
+                buttons[i].setBackgroundColor(ContextCompat.getColor(this, R.color.purple_500))
+            }
         }
     }
 
@@ -96,6 +103,15 @@ class MainActivity : AppCompatActivity() {
             buttons[2].text = Random.nextInt(1..100).toString()
             buttons[0].text = Random.nextInt(1..100).toString()
         }
+    }
+
+    fun reset(view: View){
+        Game.score = 0
+        for (button in buttons){
+            button.isEnabled = true
+        }
+        binding.btnDice.isEnabled = true
+        Game.level = 0
     }
 
 }

@@ -7,7 +7,7 @@ object Game {
     var a = 0
     var b = 0
     var score = 0
-    var level = 1
+    var level = 0
     var remainA = 0
     var randomIndex = 0
 
