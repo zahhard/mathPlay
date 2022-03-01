@@ -27,8 +27,7 @@
             android:inputType="number"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="16dp"
-            android:paddingHorizontal="16dp"
+
             android:hint="start range"/>
 
         <EditText
@@ -36,8 +35,6 @@
             android:inputType="number"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="16dp"
-            android:paddingHorizontal="16dp"
             android:hint="end range"/>
     </LinearLayout>
 
@@ -62,8 +59,7 @@
             android:inputType="number"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="16dp"
-            android:paddingHorizontal="16dp"
+
             android:hint="start range"/>
 
         <EditText
@@ -71,8 +67,7 @@
             android:inputType="number"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="16dp"
-            android:paddingHorizontal="16dp"
+
             android:hint="end range"/>
     </LinearLayout>
 
