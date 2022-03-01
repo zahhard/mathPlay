@@ -92,7 +92,7 @@ class GameActivity : AppCompatActivity() {
             Game.randomOption()
             setValueToButtons()
             for (i in 0..3) {
-                buttons[i].setBackgroundColor(ContextCompat.getColor(this, R.color.purple_500))
+                buttons[i].setBackgroundColor(ContextCompat.getColor(this, R.color.orange))
             }
         }
     }
