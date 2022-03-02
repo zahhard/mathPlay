@@ -7,16 +7,16 @@ import android.os.Bundle
 import com.example.mathplay.databinding.ActivityResultBinding
 import kotlin.system.exitProcess
 
-class resultActivty : AppCompatActivity() {
+class ResultActivty : AppCompatActivity() {
     lateinit var binding: ActivityResultBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityResultBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
-        var score = intent.getIntExtra("score", -1)
+        val score = intent.getIntExtra("score", -1)
         Game.scoreList.add(score)
-        binding.tvScoreRsult.text = score.toString()
+        binding.tvScoreRsult.text = createScoreStream()
         binding.maxScoreAdded.text = Game.max().toString()
 
         binding.btnReset.setOnClickListener {
@@ -31,5 +31,11 @@ class resultActivty : AppCompatActivity() {
             exitProcess(-1)
         }
 
+    }
+    fun createScoreStream():String{
+        var scoreStream=""
+        for (score in Game.scoreList)
+            scoreStream+="$score  "
+        return scoreStream
     }
 }

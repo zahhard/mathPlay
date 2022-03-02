@@ -7,19 +7,19 @@
     android:gravity="center"
     android:background="#FFF59D"
     android:layout_height="match_parent"
-    tools:context=".resultActivty">
+    tools:context=".ResultActivty">
 
     <TextView
         android:id="@+id/max_score"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Max score"
-        android:gravity="center"
         android:layout_margin="16dp"
         android:layout_marginTop="140dp"
+        android:gravity="center"
+        android:text="Max Score"
         android:textColor="@color/black"
         android:textSize="34sp"
-        android:textStyle="bold|italic"/>
+        android:textStyle="bold|italic" />
 
     <TextView
         android:id="@+id/max_score_added"
@@ -37,7 +37,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
         android:layout_marginTop="140dp"
-        android:text="Final score"
+        android:text="Score Stream"
         android:textColor="@color/black"
         android:textSize="34sp"
         android:textStyle="bold|italic" />

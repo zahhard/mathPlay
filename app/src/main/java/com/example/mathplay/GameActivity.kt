@@ -6,7 +6,6 @@ import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.CountDownTimer
-import android.util.Range
 import android.widget.Button
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
@@ -74,11 +73,6 @@ class GameActivity : AppCompatActivity() {
             binding.tvScore.text = savedInstanceState.getInt("score").toString()
             binding.tvRandom1.text = savedInstanceState.getInt("a").toString()
             binding.tvRandom2.text = savedInstanceState.getInt("b").toString()
-
-//            buttonInit()
-//            binding.tvRandom1.text = Game.a.toString()
-//            binding.tvRandom2.text = Game.b.toString()
-//            setValueToButtons()
         }
 
         countDownTimer = object : CountDownTimer(10000, 1000) {
@@ -104,7 +98,7 @@ class GameActivity : AppCompatActivity() {
     fun initView() {
         Game.nextLevel()
         if (Game.level > 5) {
-            var intent = Intent(this, resultActivty::class.java)
+            val intent = Intent(this, ResultActivty::class.java)
             intent.putExtra("score", Game.score)
             startForResult.launch(intent)
         } else {
