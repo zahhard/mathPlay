@@ -14,7 +14,6 @@ class resultActivty : AppCompatActivity() {
         binding = ActivityResultBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
-
         var score = intent.getIntExtra("score", -1)
         Game.scoreList.add(score)
         binding.tvScoreRsult.text = score.toString()

@@ -88,11 +88,14 @@ class GameActivity : AppCompatActivity() {
             }
 
             override fun onFinish() {
-                initView()
-                for (i in 0..3){
-                    buttons[i].isClickable = true
+                if (Game.level<=5) {
+                    initView()
+                    for (i in 0..3) {
+                        buttons[i].isClickable = true
+                    }
+                    countDownTimer.start()
                 }
-                countDownTimer.start()
+
             }
         }
         countDownTimer.start()
@@ -163,6 +166,7 @@ class GameActivity : AppCompatActivity() {
             val isReset = intent?.getBooleanExtra("isReset", false)
             if (isReset == true){
                 reset()
+                countDownTimer.start()
             }
         }
     }
