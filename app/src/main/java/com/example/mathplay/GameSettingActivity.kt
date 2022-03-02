@@ -12,10 +12,10 @@ import java.lang.Exception
 
 class GameSettingActivity : AppCompatActivity() {
 
-    lateinit var binding : ActivityGameSettingBinding
-    lateinit var operator : String
-    var isSetA   = false
-    var isSetB   = false
+    lateinit var binding: ActivityGameSettingBinding
+    lateinit var operator: String
+    var isSetA = false
+    var isSetB = false
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityGameSettingBinding.inflate(layoutInflater)
@@ -23,52 +23,58 @@ class GameSettingActivity : AppCompatActivity() {
         setContentView(view)
 
         binding.btnGoToGame.setOnClickListener {
-            var intent = Intent(this, GameActivity::class.java)
-            var inputOperator = binding.edChooseOperator.text
+
 
             if (binding.startRangeA.text.isNullOrBlank() &&
                 binding.startRangeB.text.isNullOrBlank() &&
                 binding.endRangeA.text.isNullOrBlank() &&
                 binding.endRangeB.text.isNullOrBlank() &&
-                binding.edChooseOperator.text.isNullOrBlank()){
-                Game.operator = "%"
-                startActivity(intent)
-            }
-            if (inputOperator.matches(Regex("^[*]|[-]|[+]|[/]|[%]$"))){
-                operator = inputOperator.toString()
-                intent.putExtra("operator", operator)
-            }
-            try {
-                if (binding.startRangeA.text.toString() < binding.endRangeA.text.toString() &&
-                    !binding.startRangeA.text.isNullOrBlank()&&
-                    !binding.endRangeA.text.isNullOrBlank()){
-                    Game.startRangA = binding.startRangeA.text.toString()
-                    Game.endRangA = binding.endRangeA.text.toString()
-                    isSetA = true
+                binding.edChooseOperator.text.isNullOrBlank()
+            ) {
+                Toast.makeText(this, " At least please fill the ranges", Toast.LENGTH_SHORT).show()
+            } else {
+                val inputOperator = binding.edChooseOperator.text
+                if (inputOperator.isNullOrBlank()) {
+                    Game.operator = "%"
+                } else if (inputOperator.matches(Regex("^[*]|[-]|[+]|[/]|[%]$"))) {
+                    Game.operator = inputOperator.toString()
                 }
-                else {
-                    binding.startRangeA.error = "inValid range"
-                    binding.endRangeA.error = "inValid range"
+                try {
+                    if (binding.startRangeA.text.isNullOrBlank()||
+                         binding.endRangeA.text.isNullOrBlank()||
+                            binding.startRangeB.text.isNullOrBlank()||
+                        binding.startRangeB.text.isNullOrBlank())
+                    {
+                        Toast.makeText(this, "please fill all the ranges", Toast.LENGTH_SHORT).show()
+                    }
+                       else {
+                        if (binding.startRangeA.text.toString().toInt() < binding.endRangeA.text.toString().toInt() && !binding.startRangeA.text.isNullOrBlank() && !binding.endRangeA.text.isNullOrBlank()) {
+                            Game.startRangA = binding.startRangeA.text.toString()
+                            Game.endRangA = binding.endRangeA.text.toString()
+                            isSetA = true
+                        } else {
+                            binding.startRangeA.error = "inValid range"
+                            binding.endRangeA.error = "inValid range"
+                        }
+
+                        if (binding.startRangeB.text.toString().toInt() < binding.endRangeB.text.toString().toInt() && !binding.startRangeB.text.isNullOrBlank() && !binding.endRangeB.text.isNullOrBlank()) {
+                            Game.startRangB = binding.startRangeB.text.toString()
+                            Game.endRangB = binding.endRangeB.text.toString()
+                            isSetB = true
+                        } else {
+                            binding.startRangeB.error = "inValid range"
+                            binding.endRangeB.error = "inValid range"
+                        }
+                    }
+                } catch (e: Exception) {
+                    Toast.makeText(this, "invalid", Toast.LENGTH_SHORT).show()
                 }
 
-                if (binding.startRangeB.text.toString() < binding.endRangeB.text.toString() &&
-                    !binding.startRangeB.text.isNullOrBlank()&&
-                    !binding.endRangeB.text.isNullOrBlank()){
-                    Game.startRangB = binding.startRangeB.text.toString()
-                    Game.endRangB = binding.endRangeB.text.toString()
-                    isSetB = true
-                }
-                else {
-                    binding.startRangeB.error = "inValid range"
-                    binding.endRangeB.error = "inValid range"
+                if (isSetA && isSetB) {
+                    val intent = Intent(this, GameActivity::class.java)
+                    startActivity(intent)
                 }
             }
-            catch (e:Exception){
-                Toast.makeText(this, "invalid", Toast.LENGTH_SHORT).show()
-            }
-
-            if (isSetA && isSetB)
-                startActivity(intent)
         }
     }
 }

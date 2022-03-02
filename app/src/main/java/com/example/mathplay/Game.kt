@@ -14,55 +14,52 @@ object Game {
     var endRangA = "100"
     var startRangB = "0"
     var endRangB = "10"
-    var operator = ""
+    var operator = "%"
     var scoreList = ArrayList<Int>()
 
 
-    fun createRandoms(){
+    fun createRandoms() {
         a = Random.nextInt(startRangA.toInt()..endRangA.toInt())
         b = Random.nextInt(startRangB.toInt()..endRangB.toInt())
     }
 
-    fun nextLevel(){
+    fun nextLevel() {
         createRandoms()
-        level ++
-
+        level++
         calcResult()
     }
 
-    fun calcResult (){
-        if (operator == "%") {
+    fun calcResult() {
+        if (operator =="%") {
             if (a > b) {
                 result = a % b
-            } else
+            } else {
                 result = b % a
-        }
-
-        if (operator == "*"){
+            }
+        } else if (operator == "*") {
             result = a * b
-        }
-        if (operator == "+"){
+        } else if (operator == "+") {
             result = a + b
-        }
-        if (operator == "-"){
+        } else if (operator == "-") {
             if (a > b) {
                 result = a - b
-            } else
+            } else {
                 result = b - a
-        }
-        if (operator == "/"){
+            }
+        } else if (operator == "/") {
             if (a > b) {
                 result = a / b
-            } else
+            } else {
                 result = b / a
+            }
         }
     }
 
-    fun randomOption(){
+    fun randomOption() {
         randomIndex = Random.nextInt(0..3)
     }
 
-    fun max (): Int? {
+    fun max(): Int? {
         return (scoreList.maxOrNull())
     }
 }
