@@ -37,7 +37,7 @@ class GameActivity : AppCompatActivity() {
             for (i in 0..3){
                 buttons[i].isClickable = true
             }
-            countDownTimer.start()
+
         }
 
         binding.tvScore.text = Game.score.toString()
@@ -115,6 +115,7 @@ class GameActivity : AppCompatActivity() {
             for (i in 0..3) {
                 buttons[i].setBackgroundColor(ContextCompat.getColor(this, R.color.orange))
             }
+            countDownTimer.start()
         }
     }
 
