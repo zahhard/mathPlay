@@ -16,9 +16,17 @@ class ResultActivty : AppCompatActivity() {
         setContentView(view)
         val score = intent.getIntExtra("score", -1)
         Game.scoreList.add(score)
+
+        initViews()
+        setListeners()
+
+    }
+    fun initViews(){
         binding.tvScoreRsult.text = createScoreStream()
         binding.maxScoreAdded.text = Game.max().toString()
+    }
 
+    fun setListeners(){
         binding.btnReset.setOnClickListener {
             val resultIntent = Intent()
             resultIntent.putExtra("isReset" , true)
@@ -30,9 +38,8 @@ class ResultActivty : AppCompatActivity() {
             moveTaskToBack(true)
             exitProcess(-1)
         }
-
     }
-    fun createScoreStream():String{
+    private fun createScoreStream():String{
         var scoreStream=""
         for (score in Game.scoreList)
             scoreStream+="$score  "
