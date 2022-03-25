@@ -22,7 +22,7 @@ class ResultActivty : AppCompatActivity() {
 
     }
     fun initViews(){
-        binding.tvScoreRsult.text = createScoreStream()
+        binding.tvScoreRsult.text = Game.score.toString()
         binding.maxScoreAdded.text = Game.max().toString()
     }
 

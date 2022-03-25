@@ -23,7 +23,8 @@ class GameActivity : AppCompatActivity() {
         binding = ActivityGameBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
-
+//--------------------------------------------------------------------------------------------------
+        binding.tvOperator.text = Game.operator
         buttonInit()
         Game.nextLevel()
         binding.tvRandom1.text = Game.a.toString()
@@ -113,6 +114,7 @@ class GameActivity : AppCompatActivity() {
         }
     }
 
+    //Initialize of each buttons of each options
     fun buttonInit() {
         buttons.add(binding.btnOption1)
         buttons.add(binding.btnOption2)
@@ -120,17 +122,17 @@ class GameActivity : AppCompatActivity() {
         buttons.add(binding.btnOption4)
     }
 
-    fun setValueToButtons() {
-        var endRange = (Game.b) * 2
+    private fun setValueToButtons() {
+        var endRange = (Game.a) * 2
         if (Game.operator == "*")
-            endRange = (Game.b) * (Game.b)
+            endRange = (Game.a) * (Game.b)
 
         for (i in 0..3){
             if (Game.randomIndex == i){
                 buttons[i].text = Game.result.toString()
             }
             else
-                buttons[i].text = Random.nextInt((Game.a)..endRange).toString()
+                buttons[i].text = Random.nextInt((Game.b)..endRange).toString()
         }
     }
 
