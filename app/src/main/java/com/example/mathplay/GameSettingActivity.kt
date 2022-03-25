@@ -17,62 +17,55 @@ class GameSettingActivity : AppCompatActivity() {
 
         binding.btnGoToGame.setOnClickListener {
             if (areValidFields()) {
-                Game.startRangA = binding.startRangeA.text.toString()
-                Game.endRangA = binding.endRangeA.text.toString()
-                Game.startRangB = binding.startRangeB.text.toString()
-                Game.endRangB = binding.endRangeB.text.toString()
-                Game.operator = binding.edChooseOperator.text.toString()
+                var a = binding.endRangeA.text.toString()
+                var b = binding.endRangeB.text.toString()
+
+                if (b > a) {
+                    Game.a = b.toInt()
+                    Game.b = a.toInt()
+                }
+                else{
+                    Game.a = a.toInt()
+                    Game.b = b.toInt()
+                }
+
+                setOperator()
                 val intent = Intent(this, GameActivity::class.java)
                 startActivity(intent)
             }
         }
     }
 
+    private fun setOperator(){
+        if (binding.rbPlus.isChecked)
+            Game.operator = "+"
+        if (binding.rbMinus.isChecked)
+            Game.operator = "-"
+        if (binding.rbMulti.isChecked)
+            Game.operator = "*"
+        if (binding.rbDivide.isChecked)
+            Game.operator = "/"
+        if (binding.rbDivideRemaining.isChecked)
+            Game.operator = "%"
+    }
+
     private fun areValidFields(): Boolean {
-        if (binding.startRangeA.text.isNullOrBlank() &&
-            binding.startRangeB.text.isNullOrBlank() &&
-            binding.endRangeA.text.isNullOrBlank() &&
-            binding.endRangeB.text.isNullOrBlank() &&
-            binding.edChooseOperator.text.isNullOrBlank()
+        if (binding.endRangeA.text.isNullOrBlank() &&
+            binding.endRangeB.text.isNullOrBlank()
         ) {
             Toast.makeText(this, "please fill all fields", Toast.LENGTH_SHORT).show()
             return false
         }
 
-        if (binding.startRangeA.text.isNullOrBlank() || binding.endRangeA.text.isNullOrBlank()) {
-            binding.startRangeA.error = "fill both range"
-            binding.endRangeA.error = "fill both range"
+        if (binding.endRangeA.text.isNullOrBlank()) {
+            binding.endRangeA.error = "fill range"
             return false
         }
 
-        if (binding.startRangeA.text.toString().toInt() >= binding.endRangeA.text.toString()
-                .toInt()
-        ) {
-            binding.startRangeA.error = "invalid range"
-            binding.endRangeA.error = "invalid range"
+        if (binding.endRangeB.text.isNullOrBlank()) {
+            binding.endRangeB.error = "fill range"
             return false
         }
-
-        if (binding.startRangeB.text.isNullOrBlank() || binding.endRangeB.text.isNullOrBlank()) {
-            binding.startRangeB.error = "fill both range"
-            binding.endRangeB.error = "fill both range"
-            return false
-        }
-
-        if (binding.startRangeB.text.toString().toInt() >= binding.endRangeB.text.toString()
-                .toInt()
-        ) {
-            binding.startRangeB.error = "invalid range"
-            binding.endRangeB.error = "invalid range"
-            return false
-        }
-
-        val inputOperator = binding.edChooseOperator.text
-        if (inputOperator.isNullOrBlank() || !inputOperator.matches(Regex("^[*]|[-]|[+]|[/]|[%]$"))) {
-            Toast.makeText(this, " insert an oprator between /*%+-", Toast.LENGTH_SHORT).show()
-            return false
-        }
-
         return true
     }
 }

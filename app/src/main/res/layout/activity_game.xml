@@ -14,19 +14,10 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
+        android:layout_gravity="center"
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/tv_text"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="20sp"
-            android:gravity="center"
-            android:text="@string/questionText"
-            android:textColor="@color/black"
-            android:textSize="25sp" />
-
-    <TextView
         android:id="@+id/tv_random1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -36,7 +27,16 @@
         android:textColor="@color/black"
         android:text="TextView" />
 
-    <TextView
+        <TextView
+            android:id="@+id/tv_operator"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/questionText"
+            android:textColor="@color/black"
+            android:textSize="25sp" />
+
+        <TextView
         android:id="@+id/tv_random2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
