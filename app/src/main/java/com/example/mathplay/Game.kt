@@ -1,5 +1,6 @@
 package com.example.mathplay
 
+import android.widget.Toast
 import kotlin.random.Random
 import kotlin.random.nextInt
 
@@ -31,10 +32,14 @@ object Game {
 
     fun calcResult() {
         if (operator =="%") {
-            if (a > b) {
-                result = a % b
-            } else {
-                result = b % a
+            try {
+                if (a > b) {
+                    result = a % b
+                } else {
+                    result = b % a
+                }
+            }
+            catch (e: Exception){
             }
         } else if (operator == "*") {
             result = a * b
@@ -47,10 +52,15 @@ object Game {
                 result = b - a
             }
         } else if (operator == "/") {
-            if (a > b) {
-                result = a / b
-            } else {
-                result = b / a
+            try {
+                if (a > b) {
+                    result = a / b
+                } else {
+                    result = b / a
+                }
+            }
+            catch (e: Exception){
+
             }
         }
     }
