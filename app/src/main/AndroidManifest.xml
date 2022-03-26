@@ -10,21 +10,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MathPlay">
         <activity
-            android:name=".GameSettingActivity"
+            android:name=".BaseActivity"
             android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-        <activity
-            android:name=".ResultActivty"
-            android:configChanges="orientation|screenSize|keyboardHidden"
-            android:exported="false" />
-        <activity
-            android:name=".GameActivity"
-            android:configChanges="orientation|screenSize|keyboardHidden"
-            android:exported="false">
+        <intent-filter>
+            <action android:name="android.intent.action.MAIN" />
+
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent-filter>
         </activity>
     </application>
 
