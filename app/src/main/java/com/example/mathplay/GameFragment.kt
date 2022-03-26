@@ -20,6 +20,7 @@ import kotlin.random.Random
 import kotlin.random.nextInt
 
 class GameFragment : Fragment() {
+    private lateinit var viewModel: ViewModel
     lateinit var binding : FragmentGameBinding
     var buttons = ArrayList<Button>()
     lateinit var countDownTimer : CountDownTimer
