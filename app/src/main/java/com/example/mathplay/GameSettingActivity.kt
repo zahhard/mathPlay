@@ -21,12 +21,12 @@ class GameSettingActivity : AppCompatActivity() {
                 var b = binding.endRangeB.text.toString()
 
                 if (b > a) {
-                    Game.a = b.toInt()
-                    Game.b = a.toInt()
+                    Game.endRangA = b
+                    Game.endRangB = a
                 }
                 else{
-                    Game.a = a.toInt()
-                    Game.b = b.toInt()
+                    Game.endRangA = a
+                    Game.endRangB = b
                 }
 
                 setOperator()

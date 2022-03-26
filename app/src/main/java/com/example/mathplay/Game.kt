@@ -4,17 +4,20 @@ import kotlin.random.Random
 import kotlin.random.nextInt
 
 object Game {
-    var a = 0
-    var b = 0
+    var a = 1
+    var b = 1
     var score = 0
     var level = 0
     var result = 0
     var randomIndex = 0
-    var startRangA = "0"
+    var startRangA = "1"
     var endRangA = "100"
-    var startRangB = "0"
+    var startRangB = "1"
     var endRangB = "10"
     var operator = "%"
+    var firstOption = 1
+    var secondOption = 2
+    var thirdOption = 3
     var scoreList = ArrayList<Int>()
 
 
@@ -25,8 +28,21 @@ object Game {
 
     fun nextLevel() {
         createRandoms()
+        createValueForOptions()
         level++
         calcResult()
+    }
+
+    fun createValueForOptions(){
+        var endRange = endRangA.toInt()
+        if (operator == "*" || operator == "+")
+            endRange = endRangA.toInt() * endRangB.toInt()
+        if (operator == "-" || operator == "/" || operator == "%")
+            endRange = endRangA.toInt() - endRangB.toInt()
+
+        firstOption = Random.nextInt(1 .. endRange.toInt())
+        secondOption = Random.nextInt(1 .. endRange.toInt())
+        thirdOption = Random.nextInt(1 .. endRange.toInt())
     }
 
     fun calcResult() {
