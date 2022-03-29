@@ -1,13 +1,11 @@
 package com.example.mathplay
 
-import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.example.mathplay.databinding.FragmentGameSetting2Binding
 
@@ -34,12 +32,12 @@ class GameSettingFragment : Fragment() {
                 var b = binding.endRangeB.text.toString()
 
                 if (b > a) {
-                    Game.a = b.toInt()
-                    Game.b = a.toInt()
+                    GameRepository.a = b.toInt()
+                    GameRepository.b = a.toInt()
                 }
                 else{
-                    Game.a = a.toInt()
-                    Game.b = b.toInt()
+                    GameRepository.a = a.toInt()
+                    GameRepository.b = b.toInt()
                 }
                 findNavController().navigate(R.id.action_gameSettingFragment_to_gameFragment)
                 setOperator()
@@ -50,15 +48,15 @@ class GameSettingFragment : Fragment() {
 
     private fun setOperator(){
         if (binding.rbPlus.isChecked)
-            Game.operator = "+"
+            GameRepository.operator = "+"
         if (binding.rbMinus.isChecked)
-            Game.operator = "-"
+            GameRepository.operator = "-"
         if (binding.rbMulti.isChecked)
-            Game.operator = "*"
+            GameRepository.operator = "*"
         if (binding.rbDivide.isChecked)
-            Game.operator = "/"
+            GameRepository.operator = "/"
         if (binding.rbDivideRemaining.isChecked)
-            Game.operator = "%"
+            GameRepository.operator = "%"
     }
 
     private fun areValidFields(): Boolean {

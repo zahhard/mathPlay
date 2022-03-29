@@ -1,19 +1,18 @@
 package com.example.mathplay
 
-import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import com.example.mathplay.databinding.ActivityResultBinding
 import com.example.mathplay.databinding.FragmentResultBinding
 import kotlin.system.exitProcess
 
 class ResultFragment : Fragment() {
     lateinit var binding: FragmentResultBinding
+    private lateinit var viewModel: ViewModel
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
@@ -23,13 +22,19 @@ class ResultFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentResultBinding.inflate(inflater, container, false)
-        initViews()
-        setListeners()
         return  binding.root
     }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        viewModel = ViewModelProvider(this).get(viewModel::class.java)
+        initViews()
+        setListeners()
+
+    }
     fun initViews(){
-        binding.tvScoreRsult.text = Game.score.toString()
-        binding.maxScoreAdded.text = Game.max().toString()
+        binding.tvScoreRsult.text = GameRepository.score.toString()
+        binding.maxScoreAdded.text = viewModel.max().toString()
     }
 
     fun setListeners(){
@@ -45,13 +50,13 @@ class ResultFragment : Fragment() {
     }
 
     private fun resetGame() {
-        Game.score = 0
-        Game.level = 0
+        GameRepository.score = 0
+        GameRepository.level = 0
     }
 
     private fun createScoreStream():String{
         var scoreStream=""
-        for (score in Game.scoreList)
+        for (score in GameRepository.scoreList)
             scoreStream+="$score  "
         return scoreStream
     }

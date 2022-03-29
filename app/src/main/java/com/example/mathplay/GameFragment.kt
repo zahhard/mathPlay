@@ -1,9 +1,7 @@
 package com.example.mathplay
 
 import android.app.Activity
-import android.content.Intent
 import android.graphics.Color
-import android.os.Binder
 import android.os.Bundle
 import android.os.CountDownTimer
 import androidx.fragment.app.Fragment
@@ -14,6 +12,7 @@ import android.widget.Button
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.mathplay.databinding.FragmentGameBinding
 import kotlin.random.Random
@@ -38,13 +37,14 @@ class GameFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        viewModel = ViewModelProvider(this).get(viewModel::class.java)
 
-        binding.tvOperator.text = Game.operator
+        binding.tvOperator.text = GameRepository.operator
         buttonInit()
-        Game.nextLevel()
-        binding.tvRandom1.text = Game.a.toString()
-        binding.tvRandom2.text = Game.b.toString()
-        Game.randomOption()
+        viewModel.nextLevel()
+        binding.tvRandom1.text = GameRepository.a.toString()
+        binding.tvRandom2.text = GameRepository.b.toString()
+        viewModel.randomOption()
         setValueToButtons()
 
         binding.btnDice.setOnClickListener{
@@ -55,12 +55,12 @@ class GameFragment : Fragment() {
 
         }
 
-        binding.tvScore.text = Game.score.toString()
+        binding.tvScore.text = GameRepository.score.toString()
         for (i in 0..3) {
             buttons[i].setOnClickListener {
                 var isCorrect = false
                 for (j in 0..3) {
-                    if (j == (Game.randomIndex)) {
+                    if (j == (GameRepository.randomIndex)) {
                         buttons[j].setBackgroundColor(Color.GREEN)
                     } else {
                         buttons[j].setBackgroundColor(Color.RED)
@@ -68,15 +68,15 @@ class GameFragment : Fragment() {
                     buttons[j].isClickable = false
                 }
 
-                if (i == Game.randomIndex){
+                if (i == GameRepository.randomIndex){
                     isCorrect = true
                 }
                 if (!isCorrect) {
-                    Game.score -= 2
+                    GameRepository.score -= 2
                 } else {
-                    Game.score += 5
+                    GameRepository.score += 5
                 }
-                binding.tvScore.text = Game.score.toString()
+                binding.tvScore.text = GameRepository.score.toString()
             }
         }
 
@@ -98,7 +98,7 @@ class GameFragment : Fragment() {
             }
 
             override fun onFinish() {
-                if (Game.level<=5) {
+                if (GameRepository.level<=5) {
                     initView()
                     for (i in 0..3) {
                         buttons[i].isClickable = true
@@ -112,14 +112,14 @@ class GameFragment : Fragment() {
     }
 
     fun initView() {
-        Game.nextLevel()
-        if (Game.level > 5) {
+        viewModel.nextLevel()
+        if (GameRepository.level > 5) {
             findNavController().navigate(R.id.action_gameFragment_to_resultFragment)
-            Game.scoreList.add(Game.score)
+            GameRepository.scoreList.add(GameRepository.score)
         } else {
-            binding.tvRandom1.text = Game.a.toString()
-            binding.tvRandom2.text = Game.b.toString()
-            Game.randomOption()
+            binding.tvRandom1.text = GameRepository.a.toString()
+            binding.tvRandom2.text = GameRepository.b.toString()
+            viewModel.randomOption()
             setValueToButtons()
             for (i in 0..3) {
                 buttons[i].setBackgroundColor(ContextCompat.getColor(requireActivity(), R.color.orange))
@@ -137,37 +137,37 @@ class GameFragment : Fragment() {
     }
 
     private fun setValueToButtons() {
-        var endRange = (Game.a) * 2
-        if (Game.operator == "*")
-            endRange = (Game.a) * (Game.b)
+        var endRange = (GameRepository.a) * 2
+        if (GameRepository.operator == "*")
+            endRange = (GameRepository.a) * (GameRepository.b)
 
         for (i in 0..3){
-            if (Game.randomIndex == i){
-                buttons[i].text = Game.result.toString()
+            if (GameRepository.randomIndex == i){
+                buttons[i].text = GameRepository.result.toString()
             }
             else{
-                if (Game.b < endRange)
-                    buttons[i].text = Random.nextInt((Game.b)..endRange).toString()
+                if (GameRepository.b < endRange)
+                    buttons[i].text = Random.nextInt((GameRepository.b)..endRange).toString()
                 else
-                    buttons[i].text = Random.nextInt(endRange..(Game.b)).toString()
+                    buttons[i].text = Random.nextInt(endRange..(GameRepository.b)).toString()
             }
 
         }
     }
 
     fun reset() {
-        Game.score = 0
-        Game.level = 0
+        GameRepository.score = 0
+        GameRepository.level = 0
         initView()
-        binding.tvScore.text = Game.score.toString()
+        binding.tvScore.text = GameRepository.score.toString()
     }
 
 
     override fun onSaveInstanceState(outState: Bundle) {
-        outState.putInt("score", Game.score)
-        outState.putInt("randomIndex", Game.randomIndex)
-        outState.putInt("a", Game.a)
-        outState.putInt("b", Game.b)
+        outState.putInt("score", GameRepository.score)
+        outState.putInt("randomIndex", GameRepository.randomIndex)
+        outState.putInt("a", GameRepository.a)
+        outState.putInt("b", GameRepository.b)
         outState.putString("button0", buttons[0].text.toString())
         outState.putString("button1", buttons[1].text.toString())
         outState.putString("button2", buttons[2].text.toString())
