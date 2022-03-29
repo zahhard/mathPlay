@@ -37,7 +37,7 @@ class GameFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel = ViewModelProvider(this).get(viewModel::class.java)
+        viewModel = ViewModelProvider(this).get(ViewModel::class.java)
 
         binding.tvOperator.text = GameRepository.operator
         buttonInit()
